@@ -40,4 +40,4 @@ function create_window(_name) {
 
 <small>So if you didn't create an empty _preload.js_ file in the root folder and run into some trouble last time... Now you know why. 😉</small>
 
-This \_preload.js acts like a bridge between our backbone and our body.
+This _preload.js_ acts like a bridge between our backbone and our body.
