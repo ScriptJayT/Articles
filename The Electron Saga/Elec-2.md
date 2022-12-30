@@ -1,6 +1,15 @@
-# The Electron Saga 2: Bridge building
+# The Electron Saga 2️⃣: Bridge building
 
-Last time we build the backbone and the start of a body. Now, these two can't communicate with each other yet; the backbone can't send variables to the body. And sometimes we don't need that, but often we sort of do.
+> Hi there; a short message before we jump into the code:
+>
+> With this being the third article of this journey, I thought: why not open a [Github Repo](https://github.com/ScriptJayT/Checks-out-Electron) for this project? So here you go.
+> For those who would like access to the source code. The latest version of this project can be downloaded/pulled from this repo.
+> Note that some of the older commit-messages may be a bit wonky. I am terrible at naming things sometimes.
+>
+> Now let's jump back into the project.
+
+Last time we build the backbone and the start of a body. Now, these two can't communicate with each other yet; and sometimes we sort of do need that.
+For now we will transfer a couple of variables.
 
 If you remember, last time we had a variable which could tell us if the app was in production or not:
 
@@ -8,14 +17,13 @@ If you remember, last time we had a variable which could tell us if the app was 
 const is_dev = process.env.NODE !== "production";
 ```
 
-Well, wouldn't it be usefull to have this constant in our body as well?
-So let's take a look.
+Well, wouldn't it be usefull to have this constant in our body as well? I would think so, so let's take a look.
 
 ## Build the bridge
 
-<small>/preload.js</small>
-
 Remembering back; we told electron to preload a _preload.js_ file.
+
+<small>/main.js</small>
 
 ```js
 function create_window(_name) {
@@ -44,7 +52,9 @@ function create_window(_name) {
 
 This _preload.js_ acts like a bridge between our backbone and our body.
 
-Let's build some bridges.
+Let's build some containers to bridge over.
+
+<small>/preload.js</small>
 
 ```js
 const { contextBridge } = require("electron");
@@ -101,7 +111,7 @@ Ha, 🤔
 The platform variable logs something we expect, the `win32` is indeed the machine I'm currently working on...
 But the mode does not say anything about dev-mode or production.
 
-Well, if we take a look at the `is_dev` variable declaration
+Well, take a look at the `is_dev` variable declaration
 
 ```js
 const is_dev = process.env.NODE !== "production";
@@ -142,4 +152,6 @@ true
 win32
 ```
 
-Great! We build a bridge and successfully crossed it. <br> Till the next Article!
+Great! We build a bridge and successfully crossed it.
+Let's stop here for now.
+Will see you in the next one! 👋

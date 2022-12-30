@@ -1,4 +1,4 @@
-# The Electron Saga 1: Setup
+# The Electron Saga 1️⃣: Setup
 
 It's been a while, hasn't it? But let's not dwell and dive back into the project.
 

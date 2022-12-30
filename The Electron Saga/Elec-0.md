@@ -1,4 +1,4 @@
-# The Electron Saga 0: My First App
+# The Electron Saga 0️⃣: My First App
 
 I've always wanted to make a desktop app. ✨
 Ever since I started my webdev journey.
