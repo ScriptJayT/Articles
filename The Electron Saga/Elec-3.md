@@ -7,7 +7,7 @@ And we are back for our latest part of the Electron Sage.
 When I first started with Electron, I did not think about using a javascript framework; most of the time I use php for my webdevelopment so it did not came to mind that such a framework could be usefull.
 
 The app I wanted to build would be able to do a bit more than just add items to a list I could edit. It needed to be expandible; so I build my first page with a nice sidenav and a main... and came to the realisation that I would need to copy the sidenav each time I would add a new page.
-When using php, you could build a *index.php* which would contain the sidenav and an empty main that would be populated with a `require` or an `include`.
+When using php, you could build a *index.php* which would contain the sidenav and an empty main that would be populated with a `require` or an `include`. What file you would include would depend on the current location (the url).
 
 ```php
 <html lang="en">
@@ -49,7 +49,7 @@ I shrugged and instead of looking for a npm package that could help me, or to lo
 ## Layout
 
 First of; creating a dir *classes* in */front/logic* and a *app.js* file in the same folder.
-Then loading the *app.js* file as a module.
+Then linking the *app.js* file as a module.
 
 <small>/front/index.html</small>
 
@@ -78,11 +78,9 @@ console.log(E_system.mode);
 console.log(E_system.platform);
 ```
 
-Now, lets see, how do we want it to work?
+No breakage? Great, lets see, how do we want it to work?
 Well, when I click a button in the nav; the content should be switched out.
 I would like to be able to include content in a header, main and footer; so lets build up a nav and include some slots in our body
-
-I also created a folder */front/sheets* and added some html-files.
 
 <small>/front/index.html</small>
 
@@ -121,7 +119,7 @@ I also created a folder */front/sheets* and added some html-files.
 </body>
 ```
 
-You can see I added the `sheet` attribute to all buttons, each corresponds with an html-file I added in the */front/sheets* folder.
+You can see I added the `sheet` attribute to all buttons. I also created a folder */front/sheets* and added some html-files with names that correspond with those attributes.
 
 It is certainly possible to add aria-labels like `aria-current` and `aria-controls` to the buttons; or add a skip-to-content button above the `ul` but those features are a bit out of scope for this checking-out series.
 
@@ -130,18 +128,15 @@ I want the sheet-files to be plain old html-file; I want three containers that I
 <small>/front/sheets/home.html</small>
 ```html
 <header-content>
-   <h1>Home</h1>
+	<h1>Home</h1>
 </header-content>
 
 <main-content>
-
+	my content
 </main-content>
 
 <footer-content>
-   <div class="flex gap-5">
-      <app-info></app-info>
-      <system-info></system-info>
-   </div>
+	my footer
 </footer-content>
 ```
 
@@ -160,14 +155,14 @@ console.log(E_system.platform);
 {
 	const page = new page_loader();
 	if (page.is_ready()) {
-		D$(console.log, "Page Loader: Ready");
+		D$(console.log, "Page Loader Ready");
 		page.activate();
 	} else D$(console.warn, "Page Loader not Ready");
 }
 ```
 
 It works by using the fetch-api and a DOMParser object. 
-When a button is clicked, the class checks which sheet it links to and fetches the file. 
+When a button is clicked, the class checks which sheet it links to and fetches the file with, well `Fetch`.
 A plain text-string is returned; which is passed on to a DOMParser. This js-object is able to transform our plain string back to html.
 Then we use the good old DOM-api to query our content-blocks 
 (`<header-content>` `<main-content>` `<footer-content>`)
@@ -244,7 +239,7 @@ const data_to_html = (_html) => {
 };
 ```
 
-And the main class; it does little more than querying all nav-buttons and the `<content-slot>` tags and attaches a click-event to those nav-buttons.
+And the main class; it does little more than querying all nav-buttons with the `sheets` attribute and the `<content-slot>` tags and attaches a click-event to those nav-buttons.
 There are more functions you could add to the class; for example, automaticaly load the home.html sheet on startup. Or the sheet last used.
 And some navigation functionality like showing what the current sheet is.
 
@@ -279,7 +274,6 @@ export class page_loader {
 	 */
 	async #render(_sheet, _btn) {
 		const data = await find_sheet(_sheet);
-		// D$(console.log, data);
 		if (!data) return;
 		const [header_data, main_data, footer_data] = data_to_html(data);
 
@@ -324,3 +318,8 @@ What I noticed when using this class is, that when I write javascript in the `<s
 But what if you want to import some js anyway? Well; I noticed that custom-elements get rendered properly, (if they are defined in our app.js file); so you could use a custom-element to run that code.
 
 Conclusion: use a framework 😉
+
+## Series Conclusion
+
+In these 4 articles I set to lay out my first steps into Electron and desktop-app making. I must say I was surprised how little extra setup it is compared to web-development, for this example at least. I assume that if I where to dive deeper into the world it would require some more setup.
+I found that it is certainly possible to work with Electron without a framework (I fully build my app before realizing I could have used one); but it would have improved my dev-experience a bit.
