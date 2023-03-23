@@ -6,9 +6,9 @@ I like using FTP for filemanagement on a site. I prefer it over using the filema
 
 My current workflow is building a site localy and upload it to the server (via FTP) when it's done. Check if any functionality is broken due to the environment differences and fix those. So at the moment I don't need to upload that often.
 
-But recently I entered a project where I could not realy do that. I would have to style a page almost blindly, upload it and see what the result would be. Edit and upload again. That would be many many uploads every minute and changes that I would have to do manually. And I am not about that.
+But recently I entered a project where I could not realy do that. I would have to style a page almost blindly, upload it and see what the result would be. Edit and upload again. That would be many many uploads every minute and changes that I would have to do manually. And I am not about doing stuff manually.
 
-So I asked a senior dev at work what they used for this and they send me back the link to an SFTP plugin [(this one)]([https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp).
+So I asked a collegue what they used for this and they send me back the link to an SFTP plugin [(this one)](https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp).
 
 It's pretty good, though it's documentation is a bit scattered.
 So I'm summarizing the options here, for me to find again when I inevitably forget in the future.
@@ -24,13 +24,12 @@ For starters you need to install the plugin and have a project folder ready.
 ```
 
 Go to your command pallet (`ctrl`+`shift`+`p` on windows) and type in '`SFTP: Config`'.
-
-This will open a _sftp.json_ file and add a folder to our root.
+This will create and open a _sftp.json_ file in a new folder in our root.
 
 ```
 - root
-   - .vscode
-      - sftp.json
+	- .vscode
+		- sftp.json
 ```
 
 The file would look a bit like this:
@@ -72,18 +71,27 @@ You might have noticed that the _.vscode_ folder also got uploaded, with our fil
 <small>/root/.vscode/sftpconfig.json</small>
 
 ```json
-   "ignore": [".vscode"],
+"ignore": [".vscode"],
 ```
 
-You could add any other folders you want to ignore, but in some cases that gets mmessy. For example I like using node SASS and this means a lot of folders I don't want to upload, the node-modules and any folders with SASS-files as well.
+You could add any other folders you want to ignore, but in some cases that gets messy. For example I like using node SASS and this means a lot of folders I don't want to upload, the node-modules and any folders with SASS-files as well.
 In that case we constrict any fetch and push action to a single folder.
 When using a compiler like Vite, most often the rendered files get saved in a _public_ folder, or _live_ folder. Or whatever name you set it up to be.
 
-By using the `context` option, we can border of what folder gets synced.
+By using the `context` option, we can border of a folder.
 <small>/root/.vscode/sftpconfig.json</small>
 
 ```json
-   "context": "dir"
+"context": "live"
+```
+
+So only the contents of that folder get synched
+
+```
+- root
+	- live
+	- .vscode
+		- sftp.json
 ```
 
 ## In conclusion
@@ -97,7 +105,7 @@ By using the `context` option, we can border of what folder gets synced.
 	"username": "username",
 	"password": "password",
 	"remotePath": "/",
-	"context": "dir",
+	"context": "live",
 	"uploadOnSave": false,
 	"useTempFile": false,
 	"openSsh": false
