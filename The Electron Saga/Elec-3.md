@@ -1,13 +1,13 @@
-# The Electron Saga 3️⃣: Frameworks?
+# The Electron Saga 3️⃣: All beginings have an end.
 
-And we are back for our latest part of the Electron Sage.
+And we are back for our latest part of the Electron Sage. As this series is more about the setup I will only go so far, as building the app itself is not really linked to the workings of, and working with Electron.
 
-## I mist a bit
+## Frameworks?
 
-When I first started with Electron, I did not think about using a javascript framework; most of the time I use php for my webdevelopment so it did not came to mind that such a framework could be usefull.
+When I first started with Electron, I did not think about using a JavaScript framework; most of the time I use PHP for my web development, so it did not come to mind that such a framework could be useful.
 
-The app I wanted to build would be able to do a bit more than just add items to a list I could edit. It needed to be expandible; so I build my first page with a nice sidenav and a main... and came to the realisation that I would need to copy the sidenav each time I would add a new page.
-When using php, you could build a *index.php* which would contain the sidenav and an empty main that would be populated with a `require` or an `include`. What file you would include would depend on the current location (the url).
+The app I wanted to build would be able to do a bit more than just add items to a list I could edit. It needed to be expandable; so I build my first page with a nice sidebar and a main... and came to the realisation that I would need to copy the sidebar each time I would add a new page.
+When using PHP, you would build a page *index.php*, which would contain the sidebar and an empty main that would be populated with a `require`- or an `include` function. What file you would include would depend on the current location (the URI).
 
 ```php
 <html lang="en">
@@ -43,12 +43,12 @@ When using php, you could build a *index.php* which would contain the sidenav an
 </html>
 ```
 
-But no php, so no html-include.
-I shrugged and instead of looking for a npm package that could help me, or to look into a framework like Svelte; I decided to try importing with vanilla javascript. It worked, kind of.
+But no PHP, so no HTML-include.
+I shrugged and instead of looking for a NPM package that could help me, or to look into a framework like Svelte; I decided to try importing with vanilla JavaScript. It worked, kind of.
 
 ## Layout
 
-First of; creating a dir *classes* in */front/logic* and a *app.js* file in the same folder.
+First of; creating a new folder *classes* in */front/logic* and a new file *app.js*.
 Then linking the *app.js* file as a module.
 
 <small>/front/index.html</small>
@@ -69,7 +69,7 @@ Then linking the *app.js* file as a module.
 </head>
 ```
 
-Great, check if the connection is still working by logging the values from last time: 
+Great, check if the connection is working by logging the values from last time: 
 
 <small>/front/logic/app.js</small>
 
@@ -78,9 +78,9 @@ console.log(E_system.mode);
 console.log(E_system.platform);
 ```
 
-No breakage? Great, lets see, how do we want it to work?
+No breakage? Great, let's see, how do we want it to work?
 Well, when I click a button in the nav; the content should be switched out.
-I would like to be able to include content in a header, main and footer; so lets build up a nav and include some slots in our body
+I would like to be able to include content in a header, main and footer separately as to not break my main layout; so let's build up a nav and include some slots in our body
 
 <small>/front/index.html</small>
 
@@ -119,11 +119,11 @@ I would like to be able to include content in a header, main and footer; so lets
 </body>
 ```
 
-You can see I added the `sheet` attribute to all buttons. I also created a folder */front/sheets* and added some html-files with names that correspond with those attributes.
+You can see I added an attribute I called `sheet` to all buttons. I also created a folder */front/sheets* and added some HTML-files with names that correspond with those attribute values.
 
-It is certainly possible to add aria-labels like `aria-current` and `aria-controls` to the buttons; or add a skip-to-content button above the `ul` but those features are a bit out of scope for this checking-out series.
+It is certainly possible to add aria-labels like `aria-current` and `aria-controls` to the buttons; or add a skip-to-content button above the `ul`, but those features are a bit out of scope for this checking-out series.
 
-I want the sheet-files to be plain old html-file; I want three containers that I can target with the js dom-api and just write content as I would normally.
+I want the sheet-files to be plain old HTML-file; I want three containers that I can target with the JS dom-api and just write content as I would normally.
 
 <small>/front/sheets/home.html</small>
 ```html
@@ -142,7 +142,7 @@ I want the sheet-files to be plain old html-file; I want three containers that I
 
 ## JS
 
-The class is called `page_loader` and it just gets imported and called. The `is_ready` method checks to see if our index.html has all the required elements to work; and the `activate()` method enables the button click.
+The class is called `page_loader`, and it just gets imported and called. The `is_ready` method checks to see if our index.html has all the required elements to work; and the `activate()` method enables the button click.
 
 ```js
 import { D$ } from "./fn/dev.js";
@@ -162,8 +162,8 @@ console.log(E_system.platform);
 ```
 
 It works by using the fetch-api and a DOMParser object. 
-When a button is clicked, the class checks which sheet it links to and fetches the file with, well `Fetch`.
-A plain text-string is returned; which is passed on to a DOMParser. This js-object is able to transform our plain string back to html.
+When a button is clicked, the class checks which sheet it links to and fetches the file with, well, `Fetch`.
+A plain text-string is returned; which is passed on to a DOMParser. This JS-object is able to transform our plain string back to HTML.
 Then we use the good old DOM-api to query our content-blocks 
 (`<header-content>` `<main-content>` `<footer-content>`)
 At last it's just a matter of removing the old content from our index.html and pasting in the new content to have our final result.
@@ -173,13 +173,13 @@ At last it's just a matter of removing the old content from our index.html and p
 I had made some helper functions and saved them in the files */front/logic/fn/dev.js* and */front/logic/fn/dom.js*.
 
 `$D()`
-: Is a function that fires the passed through function only when the app is in development.
+: Is a function that fires the passed through function only when the app is in development. It uses the `is_dev` variable we bridged over before.
 
 `$S()`
-: An abbriviation for querySelector
+: An abbreviation for querySelector
 
 `$SA()`
-: An abbriviation for querySelectorAll
+: An abbreviation for querySelectorAll
 
 ### page_loader class
 
@@ -240,7 +240,7 @@ const data_to_html = (_html) => {
 ```
 
 And the main class; it does little more than querying all nav-buttons with the `sheets` attribute and the `<content-slot>` tags and attaches a click-event to those nav-buttons.
-There are more functions you could add to the class; for example, automaticaly load the home.html sheet on startup. Or the sheet last used.
+There are more functions you could add to the class; for example, automatically load the home.html sheet on startup. Or the sheet last used.
 And some navigation functionality like showing what the current sheet is.
 
 ```js
@@ -313,13 +313,20 @@ export class page_loader {
 
 ## It works but...
 
-What I noticed when using this class is, that when I write javascript in the `<script>` tags in a sheet.html; it does not get triggered in the index.html; which does not mean it is safe to allow any scripts to infiltrate those files though. My guess is that the script gets run when the fetch-request reads through the file.
+What I noticed when using this class is, that when I write JavaScript in a `<script>` tags in a sheet.html; it does not get triggered in the index.html; which does not mean it is safe to allow any scripts to infiltrate those files though. My guess is that the script gets run when the fetch-request reads through the file and not when the content gets 'pasted' into our index.html.
 
-But what if you want to import some js anyway? Well; I noticed that custom-elements get rendered properly, (if they are defined in our app.js file); so you could use a custom-element to run that code.
+But what if you want to import some JS anyway? Well; I noticed that custom-elements get rendered properly, (if they are defined in our app.js file); so you could use a custom-element to autoload JS code.
+
+Notice: I can't really speak about the security of this method; I would say not too bad, but if those HTML files got corrupted anyhow, the class would have no way of knowing.
 
 Conclusion: use a framework 😉
 
 ## Series Conclusion
 
-In these 4 articles I set to lay out my first steps into Electron and desktop-app making. I must say I was surprised how little extra setup it is compared to web-development, for this example at least. I assume that if I where to dive deeper into the world it would require some more setup.
+In these 4 articles, I set to lay out my first steps into starting with Electron and desktop-app making. I must say I was surprised how little extra setup it is compared to web development, for this example at least. I assume that if I where to dive deeper into this world, it would require some more setup. 
 I found that it is certainly possible to work with Electron without a framework (I fully build my app before realizing I could have used one); but it would have improved my dev-experience a bit.
+I like how close it is to web-development I'm used to, and working with it feels quite nice, but I can't really compare how it holds up against other app-dev frameworks.
+However, the unsolvable errors at the start of my journey should be mentioned. They did cause a bit of confusion and worry.
+
+Overall, it was fun mocking around this new environment, away from the projects lurking over my shoulder.
+Speaking of which, I should return to those. See ya! 👋
