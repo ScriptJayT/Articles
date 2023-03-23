@@ -317,7 +317,7 @@ What I noticed when using this class is, that when I write JavaScript in a `<scr
 
 But what if you want to import some JS anyway? Well; I noticed that custom-elements get rendered properly, (if they are defined in our app.js file); so you could use a custom-element to autoload JS code.
 
-Notice: I can't really speak about the security of this method; I would say not too bad, but if those HTML files got corrupted anyhow, the class would have no way of knowing.
+Notice: I can't really speak about the security of this method; I would say not too bad, but if those HTML files got corrupted anyhow, the class would have no way of knowing, never mind handeling.
 
 Conclusion: use a framework 😉
 
@@ -326,7 +326,8 @@ Conclusion: use a framework 😉
 In these 4 articles, I set to lay out my first steps into starting with Electron and desktop-app making. I must say I was surprised how little extra setup it is compared to web development, for this example at least. I assume that if I where to dive deeper into this world, it would require some more setup. 
 I found that it is certainly possible to work with Electron without a framework (I fully build my app before realizing I could have used one); but it would have improved my dev-experience a bit.
 I like how close it is to web-development I'm used to, and working with it feels quite nice, but I can't really compare how it holds up against other app-dev frameworks.
-However, the unsolvable errors at the start of my journey should be mentioned. They did cause a bit of confusion and worry.
+However, the unsolvable errors at the start of my journey should be mentioned [(The Electron Saga 0)](https://dev.to/scriptjayt/the-electron-saga-0-my-first-app-45jg). They did cause a bit of confusion and worry.
 
 Overall, it was fun mocking around this new environment, away from the projects lurking over my shoulder.
-Speaking of which, I should return to those. See ya! 👋
+Speaking of which, I should return to those. I hope you got something out of this series.
+See ya! 👋
