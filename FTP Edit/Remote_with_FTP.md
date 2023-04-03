@@ -4,11 +4,11 @@ I like using FTP for file management on a site. I prefer it over using the file 
 
 My current workflow is building a site locally and upload it to the server (via FTP) when it’s done. Check if any functionality is broken due to the environment differences and fix those. So at the moment I don’t need to upload that often.
 
-But recently I entered a project where I could not really do that. I would have to style a page almost blindly, upload it and see what the result would be. Edit and upload again. That would be many uploads every minute that I would have to do manually. And I am not about doing stuff manually.
+But recently I entered a project where I could not really do that without downloading thousands of files, which takes days. So I would have to style a page almost blindly, upload it and see what the result would be. Edit and upload again. That would be many uploads every minute that I would have to do manually. And I am not about doing stuff manually.
 
 So I asked a colleague what their solution was, and a ftp plugin for your IDE was their answer. 
-I went looking for a VS-Code extension and found[(this one)](https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp).
-It’s pretty good. Its documentation goes over a lot more than what I use and need at the moment. So I’m summarizing the options here in case I (inevitably) forget how it works.
+I went looking for a VS-Code extension and found [(this one)](https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp).
+It’s pretty good. Its documentation goes over a lot more than what I use and need at the moment. So I’m summarizing the options here in case I (inevitably) forget how it works. 😅
 
 ## Setup
 
@@ -61,7 +61,7 @@ You could also use `SFTP: Sync Remote->Local` to do the same.
 
 ## Upload
 
-The command `SFTP: Sync Local->Remote` will push any files in your root to the designated folder.
+The command `SFTP: Sync Local->Remote` will push any files in your root to the designated folder. It is smart enough to only sync the files that changed since the last upload.
 
 ## Boundaries
 
@@ -91,18 +91,20 @@ So only the contents of that folder get synced.
 		- sftp.json
 ```
 
+One thing I noticed, is that renaming files or folders does not play too well with this plugin. Instead of renaming, it creates a new file. So you would have to delete the old files. In that case I would simply delete the target folder with my ftp app, then sync my local environment to the server. This would ensure that no old remnants remain. It's a bit meh 🙄, but whatever. Overall it's still a better experience.
+
 ## In conclusion
 
-<small>Copy the next snippet for a quick setup.</small>
+<small>Copy the next snippet and replace the \<login credentials\> for a quick setup.</small>
 
 ```json
 {
 	"name": "My Project Server",
-	"host": "localhost",
-	"protocol": "ftp",
-	"port": 21,
-	"username": "username",
-	"password": "password",
+	"host": "<localhost>",
+	"protocol": "<ftp>",
+	"port": <21>,
+	"username": "<username>",
+	"password": "<password>",
 	"remotePath": "/",
 	"context": "live",
 	"uploadOnSave": false,
