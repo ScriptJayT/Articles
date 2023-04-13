@@ -1,16 +1,21 @@
-# CSS, the Old
+# CSS, The Old
 
-> CSS is more than picking a background color.
+> CSS is more than simply picking a background color
 
 An overview for new features and old css-tricks not to be used anymore.
 
-- Float Layouts
-- Padding Aspect Ratio
-- Pixel Values
-- Break Out of the Parent
-- sin(), cos(), tan();
+| Table of contents |
+| --- |
+| [Float Layouts](#float-layouts) |
+| [Padding Aspect Ratio](#padding-aspect-ratio) |
+| [Pixel Values](#pixels-values) |
+| [Break Out of the Parent](#break-out-of-the-parent) |
+| [sin(), cos(), tan()](#trigonomitry) |
 
-## Float Layouts
+## Float Layouts 
+
+[🔝](#css-the-old)
+
 You're probably familiar with this:
 
 ```css
@@ -69,7 +74,10 @@ A `display: flow-root` changes the parent's context, in this case, it means that
 
 **Use `float` with `display: flow-root` to curve text around an image**
 
-## Padding Aspect Ratio
+## Padding Aspect Ratio 
+
+[🔝](#css-the-old)
+
 
 A short one; before we had the `aspect-ratio` property, they would use a different method to achief this effect:
 
@@ -89,7 +97,7 @@ Great! But not responsive, because this would not work:
 	height: 100%;
 }
 ```
-Even though both values are 100%, they are not the same size. Because percentages refer to the size of the parent element.
+Even though both values are 100%, they are not the same size. Because percentages for sizes refer to the sizes of the parent element.
 
 So they found this hack:
 
@@ -103,7 +111,7 @@ So they found this hack:
 }
 ```
 
-But this did not work if their element had children elements like text.
+But this did not work if their element had child elements like text. The "aspect ratio" would be added to the height of the elements.
 So they did following:
 
 ```css
@@ -122,14 +130,20 @@ So they did following:
 
 But this still is not responsive to the content. The content of the child could still overflow.
 
-Lukily those days are over.
+Luckily those days are over.
 
 **Use the `aspect-ratio` property to keep a constant ratio between with and height that is responsive**
 
 
-## Pixels values
+## Pixels values 
 
-## Break-Out of the Parent
+[🔝](#css-the-old)
+
+
+## Break-Out of the Parent 
+
+[🔝](#css-the-old)
+
 
 You might find yourself in this situation:
 
@@ -152,7 +166,7 @@ You might find yourself in this situation:
 </main>
 ```
 
-Where the `max-width` constrains the width of its children to let's say 75rem; and the `full-width` wants to span the whole site width of let's say 100vw.
+Where the `max-width` constrains the width of its children to, let's pick, 75rem; and the `full-width` wants to span the whole site width of, let's say, 100vw.
 
 ```css
 .max-width {
@@ -264,3 +278,7 @@ You will have to ensure the HTML is properly wrapped; by a div, or a proper sema
 Something to think about which method you prefer. Use verbose classes on the elements that need it, or only add a class to divergent items.
 
 **Don't use `width:100vw` to break out of a container parent; rethink how to structure your HTML / how to use your CSS-classes if you can, and curse if you can't**
+
+## Trigonomitry 
+
+[🔝](#css-the-old)

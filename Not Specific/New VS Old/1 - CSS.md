@@ -1,5 +1,7 @@
 # CSS, The New
 
+> CSS is picking a fancy background color
+
 - :is(), :where()
 - :has()
 - Container Queries
