@@ -1,30 +1,14 @@
-# CSS
+# CSS, the Old
 
 > CSS is more than picking a background color.
 
 An overview for new features and old css-tricks not to be used anymore.
 
-- Old
-	- Float Layouts
-	- Padding Aspect Ratio
-	- Pixel Values
-	- Break Out of the Parent
-- New
-	- :is(), :where()
-	- :has()
-	- Container Queries
-	- Layers
-	- Nesting
-	- Use of Pre-processors
-- Tips & Tricks
-	- Min, Max, Clamp
-	- Where to put Media Queries
-	- Performant Transitions & Animations
-	- Declaritive / Semantic CSS
-- Better UX
-	- Media Prefers Reduced Motion
-	- Media Color Contrast
-	- Readability
+- Float Layouts
+- Padding Aspect Ratio
+- Pixel Values
+- Break Out of the Parent
+- sin(), cos(), tan();
 
 ## Float Layouts
 You're probably familiar with this:
