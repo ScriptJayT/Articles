@@ -2,7 +2,7 @@
 
 > CSS is more than simply picking a background color
 
-An overview for new features and old css-tricks not to be used anymore.
+Let's take a look at how things were before and how not to do those things today.
 
 | Table of contents |
 | --- |
@@ -10,7 +10,6 @@ An overview for new features and old css-tricks not to be used anymore.
 | [Padding Aspect Ratio](#padding-aspect-ratio) |
 | [Pixel Values](#pixels-values) |
 | [Break Out of the Parent](#break-out-of-the-parent) |
-| [sin(), cos(), tan()](#trigonomitry) |
 
 ## Float Layouts 
 
@@ -27,13 +26,13 @@ You're probably familiar with this:
 }
 ```
 
-In the old days this could be used to align two containers next to each other. It was more a hack than an actual way to do it, due to the effects it had on the parent.
-The element got pulled out of the flow (in a way), which meant that the parent would collapse to 0 if there were no other children to give it a height, or it wasn't given a fixed height.
+In the old days this could be used to align two containers next to each other. It was more a hack than an actual way to do it, due to the effects it had on the parent... Except it was the way to do it.
+The element got pulled out of the flow (in a way), which meant that the parent would collapse to 0 if there were no other children to give it a height, or it didn't have a height of its own.
 The clear-method was a way to tell the parent not to do that; by giving the element after the floated element the `clear` property.
 
 This way of layout whas rather fragile and with the new layout methods like `flex` and `grid`; `float` quickly became obsolete and outdated.
 
-**Refactor your old code to use `flex` or `grid` instead of `float`**
+**☝ Refactor old code to use `flex` or `grid` instead of `float`**
 
 But `float` still has its usecases. When you want text to follow the curve of an image, `float` is the perfect way to do it.
 
@@ -72,7 +71,7 @@ To fix this, we could use the clear-method again; but I prefer using the parent.
 
 A `display: flow-root` changes the parent's context, in this case, it means that it will grow to fit the content, even if the content is floated.
 
-**Use `float` with `display: flow-root` to curve text around an image**
+**☝ Use `float` with `display: flow-root` to curve text around an image**
 
 ## Padding Aspect Ratio 
 
@@ -132,13 +131,85 @@ But this still is not responsive to the content. The content of the child could 
 
 Luckily those days are over.
 
-**Use the `aspect-ratio` property to keep a constant ratio between with and height that is responsive**
+**☝ Use the `aspect-ratio` property to keep a constant ratio between with and height that is responsive**
 
 
-## Pixels values 
+## Pixels Values 
 
 [🔝](#css-the-old)
 
+A pixel. A small, square speck of which your screen is build out of. But in CSS-land, a pixel is a unit measurement, one of the first, if not the first.
+
+If you want a square of 50 by 50 pixels, you would use the following:
+```css
+.square {
+	width: 50px;
+	height: 50px;
+}
+```
+Nothing groundbreaking. But nowadays we have a lot more units that we can use like `rem`, `em`, `ch`, `vh`, `vw`, `dvh`, `dvw`...
+Each unit has their own usecase, their own reference point; and their own perks that should be taken account for.
+For this section, I will only take al look at the first three of that list.
+
+`Rem`
+: A unit that has the roots font-size as referencepoint; by default 16px. You should not change the roots font-size.
+
+`Em`
+: A unit that has the elements font-size as referencepoint. So if you change the font-size, the em-value changes as well.
+
+`Ch`
+: A unit that has the elements 0 charachter's width of the current font and font-size. So if you change the font-size, the ch-value changes as well.
+
+When should you use each? And when not?
+
+### Rem
+
+If you would use pixels, use rem instead. That is a good start in my opinion. So, font-size, width, height...
+The `rem` unit is more accessible than the pixel unit. Because a browser can easily increase the rem default value when a user wishes to use larger fonts for example. If you use pixels instead, the fonts on site might not be enlarged, which is bad UX.
+Yes, it might create some weird values for some values due to the base 16 our rem unit uses, but I find myself using css custom properties in most cases anyway, so it doesn't matter much.
+
+### Em
+
+If you want a unit that sizes with your font-size for a certain component, use `em`. Let's say we have a button with `font-size: 0.875rem` and we want a padding on all sizes of 0.4375rem. 
+Now later you might want the same button but larger, let's say `font-size: 1.25rem`; but you want to keep the same ratios, you want to "scale" the button up. In that case, you might want to change the padding value to 0.5em instead. So now the only value you need to update is the font-size.
+
+```css
+/* old */
+.btn {
+	font-size: 0.875rem; /*14px*/
+	padding: 0.4375rem; /*7px*/
+}
+.btn[large] {
+	font-size: 1.25rem; /*20px*/
+	padding: 0.6125rem; /*10px*/
+}
+/* new */
+.btn {
+	font-size: 0.875rem;
+	padding: 0.5em;
+}
+.btn[large] {
+	font-size: 1.25rem;
+}
+```
+
+It makes the code a lot cleaner; as you can see, using a value like 0.4375rem is a bit cluttering, for sure if you don't know what that value translates to in pixels, it might seem a random value.
+But by using the 0.5em, now we simply know: half of the font-size.
+And it beautifly scales the button up.
+Many use this trick to scale box-shadows as well.
+
+### Ch
+
+The `ch` unit makes it very easy to constrict a paragraph to a certain number of characters, heck, I would not be surprised if that was the exact reason it was introduced.
+It works best with monospace fonts in that way, due to all characters being the same width. It does work for other fonts too, but the result is less satisfying in my opinion.
+
+According to some UX articles, a length of 45 to 90 characters is the best length for paragraphs to ensure legibility, and yeah, that seems to work. 
+Personally I shoot for max-widths of 70 to 75ch, which fits neatly in that range. 
+This unit makes it really easy to implement that theory in our webdesigns.
+
+<small>Articles I quicly scanned through for that character-range:</small>
+[<small>Practical Typography: Line Length</small>](https://practicaltypography.com/line-length.html) 
+[<small>Webflow: Ch unit</small>](https://webflow.com/feature/control-width-of-text-elements-by-character-count-using-ch-unit)
 
 ## Break-Out of the Parent 
 
@@ -210,7 +281,7 @@ The scrollbar would push the content further back by, idk, 20 pixels on Chrome, 
 <small>(No, I did not measure the scrollbar thickness of those browsers, fyi, these values are random)</small>
 
 There is no way of counteracting these offsets, due to there being no standards about scrollbars and their width. Not even with JavaScript, or at least not reliably.
-This means that in best case: the content does not line up with the rest; or in worst case: overflow issues.
+This means that in best case: the content does not line up with the rest; or in worst case: overflow issues that completely muck up your design.
 
 So, how do you break out? 
 In my opinion, you don't. I would put the max-width class only on the blocks that actually need it. 
@@ -277,8 +348,9 @@ You will have to ensure the HTML is properly wrapped; by a div, or a proper sema
 
 Something to think about which method you prefer. Use verbose classes on the elements that need it, or only add a class to divergent items.
 
-**Don't use `width:100vw` to break out of a container parent; rethink how to structure your HTML / how to use your CSS-classes if you can, and curse if you can't**
+**☝ Don't use `width:100vw` to break out of a container parent; rethink how to structure your HTML / how to use your CSS-classes** 
+if you can, and curse if you can't.
 
-## Trigonomitry 
+In case you only need a background that spans the whole site-width, I recommend this short by Kevin Powell: [Bleeding Background](https://www.youtube.com/shorts/81pnuZFarRw) as they do a way better job than I ever could. 😉
 
-[🔝](#css-the-old)
+See you in the next one! 👋
