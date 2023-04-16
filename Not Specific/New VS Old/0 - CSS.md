@@ -1,10 +1,9 @@
-# CSS, The Old
-
 > CSS is more than simply picking a background color
 
 Let's take a look at how things were before and how not to do those things today.
 
-| Table of contents |
+## Table of contents
+| |
 | --- |
 | [Float Layouts](#float-layouts) |
 | [Padding Aspect Ratio](#padding-aspect-ratio) |
@@ -13,7 +12,7 @@ Let's take a look at how things were before and how not to do those things today
 
 ## Float Layouts 
 
-[🔝](#css-the-old)
+[🔝](#table-of-contents)
 
 You're probably familiar with this:
 
@@ -60,7 +59,7 @@ img {
 }
 ```
 
-But now we still have the collapsing problem, which is not really noticable as long as the text is long enough. But why take chances?
+But now we still have the collapsing problem, which is not really noticeable as long as the text is long enough. But why take chances?
 To fix this, we could use the clear-method again; but I prefer using the parent. It's a cleaner way to do this.
 
 ```css
@@ -75,10 +74,10 @@ A `display: flow-root` changes the parent's context, in this case, it means that
 
 ## Padding Aspect Ratio 
 
-[🔝](#css-the-old)
+[🔝](#table-of-contents)
 
 
-A short one; before we had the `aspect-ratio` property, they would use a different method to achief this effect:
+A short one; before we had the `aspect-ratio` property, they would use a different method to achieve this effect:
 
 ```css
 .element {
@@ -136,7 +135,7 @@ Luckily those days are over.
 
 ## Pixels Values 
 
-[🔝](#css-the-old)
+[🔝](#table-of-contents)
 
 A pixel. A small, square speck of which your screen is build out of. But in CSS-land, a pixel is a unit measurement, one of the first, if not the first.
 
@@ -147,18 +146,19 @@ If you want a square of 50 by 50 pixels, you would use the following:
 	height: 50px;
 }
 ```
-Nothing groundbreaking. But nowadays we have a lot more units that we can use like `rem`, `em`, `ch`, `vh`, `vw`, `dvh`, `dvw`...
-Each unit has their own usecase, their own reference point; and their own perks that should be taken account for.
+Nothing ground-breaking. But nowadays we have a lot more units that we can use like `rem`, `em`, `ch`, `vh`, `vw`, `dvh`, `dvw`...
+Each unit has their own use case, their own reference point; and their own perks that should be taken account for.
 For this section, I will only take al look at the first three of that list.
 
 `Rem`
-: A unit that has the roots font-size as referencepoint; by default 16px. You should not change the roots font-size.
+: A unit that has the roots font-size as reference point; by default 16px. 
+<small>(You can change this value by changing the roots font-size; but you should NOT do this.)</small>
 
 `Em`
-: A unit that has the elements font-size as referencepoint. So if you change the font-size, the em-value changes as well.
+: A unit that has the elements font-size as reference point. So if you change the font-size, the em-value changes as well.
 
 `Ch`
-: A unit that has the elements 0 charachter's width of the current font and font-size. So if you change the font-size, the ch-value changes as well.
+: A unit that has the elements 0 character's width of the current font and font-size. So if you change the font-size, the ch-value changes as well.
 
 When should you use each? And when not?
 
@@ -166,7 +166,7 @@ When should you use each? And when not?
 
 If you would use pixels, use rem instead. That is a good start in my opinion. So, font-size, width, height...
 The `rem` unit is more accessible than the pixel unit. Because a browser can easily increase the rem default value when a user wishes to use larger fonts for example. If you use pixels instead, the fonts on site might not be enlarged, which is bad UX.
-Yes, it might create some weird values for some values due to the base 16 our rem unit uses, but I find myself using css custom properties in most cases anyway, so it doesn't matter much.
+Yes, it might create some weird values for some regular used pixel-values due to the base 16 our rem unit uses, but I find myself using CSS custom properties in most cases anyway, so it doesn't matter much.
 
 ### Em
 
@@ -195,7 +195,7 @@ Now later you might want the same button but larger, let's say `font-size: 1.25r
 
 It makes the code a lot cleaner; as you can see, using a value like 0.4375rem is a bit cluttering, for sure if you don't know what that value translates to in pixels, it might seem a random value.
 But by using the 0.5em, now we simply know: half of the font-size.
-And it beautifly scales the button up.
+And it beautifully scales the button up.
 Many use this trick to scale box-shadows as well.
 
 ### Ch
@@ -203,17 +203,19 @@ Many use this trick to scale box-shadows as well.
 The `ch` unit makes it very easy to constrict a paragraph to a certain number of characters, heck, I would not be surprised if that was the exact reason it was introduced.
 It works best with monospace fonts in that way, due to all characters being the same width. It does work for other fonts too, but the result is less satisfying in my opinion.
 
+Similar to the `em` unit, `ch` is linked to the font-size. They are not the same though, I have noticed that for some fonts 1em and 2ch are similar in size, but not exactly so. This is due to the `em` unit being linked to the fonts height, where `ch` is character width, I believe. The wording in their descriptions are a bit fuzzy to say for sure.
+
 According to some UX articles, a length of 45 to 90 characters is the best length for paragraphs to ensure legibility, and yeah, that seems to work. 
 Personally I shoot for max-widths of 70 to 75ch, which fits neatly in that range. 
-This unit makes it really easy to implement that theory in our webdesigns.
+This unit makes it really easy to implement that theory in our web designs.
 
-<small>Articles I quicly scanned through for that character-range:</small>
+<small>Articles I quickly scanned through for that character-range:</small>
 [<small>Practical Typography: Line Length</small>](https://practicaltypography.com/line-length.html) 
 [<small>Webflow: Ch unit</small>](https://webflow.com/feature/control-width-of-text-elements-by-character-count-using-ch-unit)
 
-## Break-Out of the Parent 
+## Break out of the Parent 
 
-[🔝](#css-the-old)
+[🔝](#table-of-contents)
 
 
 You might find yourself in this situation:
@@ -261,7 +263,7 @@ body {
 .max-width {
    max-width: 75rem;
    margin-inline: auto;
-   overflow: vissible;
+   overflow: visible;
 }
 .full-width {
    position: relative;
@@ -272,8 +274,7 @@ body {
 ```
 
 You would fix the overflow issue by removing scrollbars on the `main` width `overflow: visible` and counteract the overflow-issues on the `body` with `overflow: hidden`. 
-<small>(Which most do by default anyway, so no biggy there. 
-And yes, you're better of specifying `overflow-x: hidden` in production)</small>
+<small>(Yes, you're better of specifying `overflow-x: hidden` in production)</small>
 Then you would position the article in the center by pulling it back by half the viewport width and pushing it back by half its own length. 
 
 And this would work, were it not for scrollbars.
@@ -281,7 +282,7 @@ The scrollbar would push the content further back by, idk, 20 pixels on Chrome, 
 <small>(No, I did not measure the scrollbar thickness of those browsers, fyi, these values are random)</small>
 
 There is no way of counteracting these offsets, due to there being no standards about scrollbars and their width. Not even with JavaScript, or at least not reliably.
-This means that in best case: the content does not line up with the rest; or in worst case: overflow issues that completely muck up your design.
+This means that for a best case: the content does not line up with the rest; or a worst case: overflow issues that completely muck up your design.
 
 So, how do you break out? 
 In my opinion, you don't. I would put the max-width class only on the blocks that actually need it. 
@@ -321,7 +322,7 @@ There is a catch though, and that is when the children of `.max-width` are not c
 
 Let's say that I want all `p` tags to be a maximum of 60 characters long; the `max-width` can be overwritten to be `60ch`, that is not the issue; but the text will not be able to align left with the rest of the content, due to the `margin-inline: auto`. And removing the `margin-inline` of those elements would mean that the `p` would stick to the edge of the screen instead. You could try to hard-code the `margin-left` so it lines up again, but I don't recommend doing that.
 
-You will have to ensure the HTML is properly wrapped; by a div, or a proper semanticaly correct element.
+You will have to ensure the HTML is properly wrapped; by a div, or a proper semantically correct element.
 
 ```html
 <main class="max-width">
@@ -351,6 +352,6 @@ Something to think about which method you prefer. Use verbose classes on the ele
 **☝ Don't use `width:100vw` to break out of a container parent; rethink how to structure your HTML / how to use your CSS-classes** 
 if you can, and curse if you can't.
 
-In case you only need a background that spans the whole site-width, I recommend this short by Kevin Powell: [Bleeding Background](https://www.youtube.com/shorts/81pnuZFarRw) as they do a way better job than I ever could. 😉
+In case you only need a background that spans the whole site-width, I recommend this short by Kevin Powell: [Bleeding Background](https://www.youtube.com/shorts/81pnuZFarRw) as they do a way better job explaining how to than I ever could. 😉
 
 See you in the next one! 👋
